@@ -1,5 +1,7 @@
 package Car;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class AutoSalon {
@@ -85,5 +87,25 @@ public class AutoSalon {
             }
 
         }
+    }
+
+    public Car carWithAveragePrice (){
+        BigDecimal totalPrices = BigDecimal.ZERO;
+        for (Car car : cars) {
+            totalPrices = totalPrices.add(car.getPrice());
+        }
+        BigDecimal averagePrice = totalPrices.divide(BigDecimal.valueOf(cars.length), RoundingMode.HALF_UP);
+
+        Car closerAverageCar = cars[0];
+        BigDecimal minDifference = closerAverageCar.getPrice().subtract(averagePrice).abs();
+
+        for (Car car : cars) {
+            BigDecimal difference = car.getPrice().subtract(averagePrice).abs();
+            if (difference.compareTo(minDifference) < 0) {
+                minDifference = difference;
+                closerAverageCar = car;
+            }
+        }
+            return closerAverageCar;
     }
 }

@@ -35,6 +35,10 @@ public class Main {
 
         System.out.println(autoSalon.getCartById(2L));
 
+        //машина с средней ценой в салоне
+
+        System.out.println("\nМашина с средней ценой: \n " + autoSalon.carWithAveragePrice());
+
 
     }
 }
